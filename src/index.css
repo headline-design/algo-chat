@@ -13,7 +13,25 @@ code {
 }
 
 table, th, td {
-  border: 1px solid black;
-  padding:2px;
-  margin:2px;
+width: 100%;
+border-radius: .25rem;
+color: #545b62;
+}
+
+table {
+  border-collapse: inherit !important;
+}
+
+.btn-bd-light {
+  color: #6c757d !important;
+  border-color: #dee2e6 !important;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem!important;
+}
+.btn-group-sm>.btn, .btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: .875rem;
+  border-radius: 0.2rem;
 }

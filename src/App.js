@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import Pipeline from '@pipeline-ui-2/pipeline'; //change to import Pipeline from 'Pipeline for realtime editing Pipeline index.js, and dependency to: "Pipeline": "file:..",
+import logo from "./logo.svg";
+import "./App.css";
+import "./bootstrap.css";
 
 import algosdk from 'algosdk'
 
@@ -54,7 +57,6 @@ function addTableRow(data){
   let row = table.insertRow(0);
   let cell1 = row.insertCell(0);
   cell1.innerHTML = data;
-  row.className = "message"
   }
 
 function rgbFrom8(data) {
@@ -258,7 +260,7 @@ class App extends Component {
               canvasId++
               let canvas = document.getElementById("canvas2")
               let url = canvas.toDataURL("image/png");
-              addTableRow('<td><img src="' + url + '"></img><span class="messageText">' + " " + myMessage + "</td>")
+              addTableRow('<td><img src="' + url + '"></img></td><td>' + myMessage + "</td>")
             }
           }
         }
@@ -310,6 +312,7 @@ class App extends Component {
     fetchNote(txid).then(data =>
       this.setState({ data: base64ToArrayBuffer(data) }, () =>
         this.drawData()));
+       
   }
 
   drawData = () => {
@@ -325,50 +328,114 @@ class App extends Component {
   }
 
   render() {
+    const loadingSpin = this.state.loading ? "App-logo Spin" : "App-logo";
     return (
       <div align="center">
-        <h1>Algo Chat</h1>
-        <table className="table" width="100%">
-          <tbody>
-            <tr><td width="50%">
+        <nav className="py-2 bg-light border-bottom">
+    <div className="container d-flex flex-wrap">
+      <ul className="nav me-auto">
+        <li className="nav-item"><a href="#" class="nav-link link-dark px-2 active" aria-current="page">Home</a></li>
+        <li className="nav-item"><a href="#" class="nav-link link-dark px-2">Features</a></li>
+        <li className="nav-item"><a href="#" class="nav-link link-dark px-2">Pricing</a></li>
+        <li className="nav-item"><a href="#" class="nav-link link-dark px-2">FAQs</a></li>
+        <li className="nav-item"><a href="#" class="nav-link link-dark px-2">About</a></li>
+      </ul>
+      <ul className="nav">
+        <li className="nav-item"><a href="#" class="nav-link link-dark px-2">Login</a></li>
+        <li className="nav-item"><a href="#" class="nav-link link-dark px-2">Sign up</a></li>
+      </ul>
+    </div>
+  </nav>
+  <header className="py-3 mb-4 border-bottom">
+    <div className="container d-flex flex-wrap justify-content-center">
+      <a href="/" class="d-flex align-items-center mb-3 mb-lg-0 me-lg-auto text-dark text-decoration-none">
+      <p>{"Connected Address: " + this.state.myAddress}</p>
+      </a>
+      <form className="col-12 col-lg-auto mb-3 mb-lg-0">
+      
+              <p>{"Balance: " + this.state.balance}</p>
+      </form>
+    </div>
 
-              <select onClick={this.setNet}>
+        <select className="form-select" onClick={this.setNet}>
                 <option>TestNet</option>
                 <option>MainNet</option>
               </select>
-              <h2>{this.state.net}</h2>
-              <select onChange={this.switchConnector}>
+              
+              <select className="form-select" onChange={this.switchConnector}>
                 <option>myAlgoWallet</option>
                 <option>WalletConnect</option>
                 <option>AlgoSigner</option>
               </select>
 
-              <button onClick={this.handleConnect}>Click to Connect</button><br></br>
-              <p>{"Connected Address: " + this.state.myAddress}</p>
-              <p>{"Balance: " + this.state.balance}</p>
+              <button className="btn btn-sm btn-bd-light mb-2 mb-md-0" onClick={this.handleConnect}>Click to Connect</button>
+</header>
+<h2 className="px-2 badge bg-warning">{this.state.net}</h2>
+        <div className="App container bg-light shadow">
+        <header className="App-header">
+          <img src={logo} className={loadingSpin} alt="logo" />
+          <h1 className="App-title">
+            Algo Chat
+            <span className="px-2" role="img" aria-label="Chat">
+              💬
+            </span>
+          </h1>
+          <p>
+            Brought to you by{" "}
+            <a className="text-light" href="https://headline-inc.com">
+              HEADLINE
+            </a>
+          </p>
+        </header>
 
+        <div className="row">
+          <div className="col-4  pt-3 border-right">
+            <h6>Say something about Algorand</h6>
+            <div className="comment-form"  />
+            <div ><div className="form-group"><input className="form-control" placeholder="😎 Your Name" name="name" type="text" /></div><div className="form-group"><textarea className="form-control" placeholder="🤬 Your Comment" name="message" rows="5" spellCheck="false" type="text" id="postMessage"></textarea></div><div className="alert alert-danger" style={{ display: "none" }}>Something went wrong while submitting form.</div><div className="form-group">         
+                <button className="btn btn-primary form-group" onClick={this.post}>Comment ➤</button></div></div>
+          </div>
+          <div className="col-8  pt-3 bg-white">
+            <div className="comment-list"
+              loading={this.state.loading}
+              comments={this.state.comments}
+            />
+<div className="comment-list"><h5 className="text-muted mb-4"><span className="badge badge-success">0</span> Comment</h5><div className="alert text-center alert-info">Be the first to comment</div> <div><table className="media-body p-2 shadow-sm rounded bg-light border rounded" id="chatLog" style={{ display: "none" }}></table></div></div></div><footer class="App-footer"><button className="btn btn-bd-light" onClick={this.startRefresh}>Refresh</button><canvas id="canvas2" height="30px" width="30px"></canvas>               
+<div>{"Transaction ID: " + this.state.txID}</div>
+                </footer></div>
+          </div>
+          <div class="App container ">
+          <input className="form-control" type="text" id="picAddress" placeholder="txid of pic"/>
+<div className="bd-example">
+        <table className="table" width="100%">
+        <td>
 
-
+                
+              </td>
+          <tbody>
+            <tr>
+            <td width="50%">
               <h1>ACTIONS</h1>
-              <button onClick={this.deploy}>Deploy Contract</button>
-              <button onClick={this.optIn}>Opt In</button>
-              <input placeholder="App Id" id="appid" value="69207814" type="number"></input>
+              <button className="btn btn-sm btn-bd-light mb-2 mb-md-0" onClick={this.deploy}>Deploy Contract</button>
+              <button className="btn btn-sm btn-bd-light mb-2 mb-md-0" onClick={this.optIn}>Opt In</button>
+              <input className="form-control ds-input" placeholder="App Id" id="appid" type="number"></input>
+              </td>
+              <td width="50%">
+
+              <br></br>
+
               <p>{"Application Address: " + this.state.appAddress}</p>
               <br></br><br></br>
-              <button onClick={this.delete}>Delete App</button>
+              <button className="btn btn-danger" onClick={this.delete}>Delete App</button>
               <h3>Change Profile Pic</h3>
-              <input type="text" id="picAddress" placeholder="txid of pic"></input>
-              <button onClick={this.changePic}>Fuse</button>
-            </td><td>
-                <p>{"Transaction ID: " + this.state.txID}</p>
-                <canvas id="canvas2" height="30px" width="30px"></canvas>
-                <button onClick={this.startRefresh}>Refresh</button>
-                <input type="text" id="postMessage"></input>
-                <button onClick={this.post}>Post</button>
-                <table id="chatLog"></table>
-              </td></tr>
+              <input className="form-control ds-input" type="text" id="picAddress" placeholder="txid of pic"></input>
+              <button className="btn btn-sm btn-bd-light mb-2 mb-md-0" onClick={this.changePic}>Fuse</button>
+            </td>
+</tr>
           </tbody>
         </table>
+        </div>
+        </div>
       </div >
 
     );
