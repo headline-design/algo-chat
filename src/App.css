@@ -36,3 +36,42 @@
     transform: rotate(360deg);
   }
 }
+
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+table, th, td ,tr {
+  border: 1px solid black;
+  padding:2px;
+  margin:2px;
+  border-radius:10px;
+  overflow: hidden
+}
+
+table{
+  width:100%
+}
+
+
+.message{
+  background-color: aquamarine;
+  color:black;
+  border-radius:10px;
+  width: 100%;
+  overflow:hidden
+}
+
+tr {
+  vertical-align: middle;
+  overflow: hidden;
+  border-radius: 10px
+}
+
+.messageText {
+  position: relative;
+  top: -6px;
+  padding-left: 8px;
+}

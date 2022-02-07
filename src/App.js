@@ -54,6 +54,7 @@ function addTableRow(data){
   let row = table.insertRow(0);
   let cell1 = row.insertCell(0);
   cell1.innerHTML = data;
+  row.className = "message"
   }
 
 function rgbFrom8(data) {
@@ -257,7 +258,7 @@ class App extends Component {
               canvasId++
               let canvas = document.getElementById("canvas2")
               let url = canvas.toDataURL("image/png");
-              addTableRow('<td><img src="' + url + '"></img></td><td>' + myMessage + "</td>")
+              addTableRow('<td><img src="' + url + '"></img><span class="messageText">' + " " + myMessage + "</td>")
             }
           }
         }
